@@ -14,7 +14,8 @@ class UniversityNoticeCrawler:
     driver = webdriver.Chrome()
     driver.get("https://www.inje.ac.kr/kor/Template/Bsub_page.asp?Ltype=5&Ltype2=0&Ltype3=0&Tname=S_News&Ldir=board/S_News&SearchText=&SearchKey=&d1n=5&d2n=1&d3n=1&d4n=0&Lpage=Tboard_L&div=1")
     # idx 초기값 설정 필요
-    idx = 0
+    
+    idx = cursor.callproc('SELECT COUNT(0) FROM university_notice')
     bodys = driver.find_element(By.CLASS_NAME, "b-list").find_element(By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")
     for body in bodys:
       data = {

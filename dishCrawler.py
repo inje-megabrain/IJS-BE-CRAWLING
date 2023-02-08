@@ -5,8 +5,9 @@ import psycopg2
 import datetime
 from dotenv import load_dotenv
 import os
+import time
 
-load_dotenv()
+# load_dotenv()
 class DishCrawler:
 
   def crawl():
@@ -21,6 +22,9 @@ class DishCrawler:
     # 일주일의 시작일(월요일)
     startDate    = temporaryDate+ datetime.timedelta(days=-weekDayCount)
 
+    cursor.execute('DELETE FROM university_dishes') 
+    db.commit()
+    time.sleeP(1)
     for idx, i in enumerate(range(3, 8)):
       
       try: a = driver.find_element(By.XPATH,'/html/body/main/div/div/article/div/div[2]/div[2]/table/tbody/tr[1]/td['+str(i)+']').text.split()

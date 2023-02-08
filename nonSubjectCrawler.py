@@ -5,6 +5,7 @@ import psycopg2
 import re
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv()
 class NonSubjectCrawler:
@@ -19,7 +20,10 @@ class NonSubjectCrawler:
     _class = driver.find_element(By.CLASS_NAME, "tab-list")
     classes = _class.find_elements(By.TAG_NAME, "li")
 
-    for idx,i in enumerate(classes):
+    cursor.execute('DELETE FROM university_nonsubjects') 
+    db.commit()
+    time.sleep(1)
+    for idx, i in enumerate(classes):
       classA = i.find_element(By.CLASS_NAME, "tit").text.split('\n')
       classB = i.find_element(By.CLASS_NAME, "btn-group")
       classBB = str(classB.find_element(By.CLASS_NAME, "btn-info").get_attribute("onclick"))
